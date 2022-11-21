@@ -52,9 +52,11 @@ final class ProductService extends Base
             if ($value['image_name']) {
                 $filename = __DIR__ . '/../../../uploads/' . $value['image_name'];
                 $fp = fopen($filename, "r");
-                $contents = fread($fp, filesize($filename));
-                $byte_array = unpack('C*', $contents);
-                $obj->image = $byte_array;
+                if (file_exists($filename)) {
+                    $contents = fread($fp, filesize($filename));
+                    $byte_array = unpack('C*', $contents);
+                    $obj->image = $byte_array;
+                }
             }
             array_push($productsArray, $obj);
         }

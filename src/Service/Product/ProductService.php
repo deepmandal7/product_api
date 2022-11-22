@@ -46,6 +46,7 @@ final class ProductService extends Base
         foreach ($products as $value) {
             $obj = (object) [
                 'id' => $value['id'],
+                'title' => $value['title'],
                 'description' => $value['description'],
                 'image_name' => $value['image_name'],
             ];

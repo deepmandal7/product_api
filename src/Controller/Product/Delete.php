@@ -21,7 +21,6 @@ final class Delete extends Base
         $productId = (int) $args['id'];
         // $userId = $this->getAndValidateUserId($input);
         $product = $this->getProductService()->delete($productId);
-        var_dump($product);
         return $this->jsonResponse($response, 'success', $product, 204);
     }
 }

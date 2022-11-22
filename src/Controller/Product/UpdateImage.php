@@ -18,7 +18,6 @@ final class UpdateImage extends Base
         Response $response,
         array $args
     ): Response {
-        var_dump($args);
         $input = (array) $request->getParsedBody();
         $directory = $this->container->get('upload_directory');
         $uploadedFiles = $request->getUploadedFiles();

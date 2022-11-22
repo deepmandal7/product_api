@@ -21,7 +21,6 @@ final class GetOne extends Base
         $productId = (int) $args['id'];
         // $userId = $this->getAndValidateUserId($input);
         $product = $this->getProductService()->getOne($productId);
-        // var_dump($product);
         return $this->jsonResponse($response, 'success', $product, 200);
     }
 }

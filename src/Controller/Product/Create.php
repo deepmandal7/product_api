@@ -16,15 +16,12 @@ final class Create extends Base
         $uploadedFiles = $request->getUploadedFiles();
         $uploadedFile = $uploadedFiles['image'];
         $filename = null;
-        var_dump("hereuploadedFile");
-        var_dump($uploadedFile);
         if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
             $filename = $this->moveUploadedFile($directory, $uploadedFile);
             $response->write('uploaded ' . $filename . '<br/>');
         }
         $input = (array) $request->getParsedBody();
         $input['image_name'] = $filename;
-        var_dump($input);
         $product = $this->getProductService()->create($input);
 
         return $this->jsonResponse($response, 'success', $product, 201);

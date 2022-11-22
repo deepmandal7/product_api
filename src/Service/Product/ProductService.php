@@ -53,7 +53,6 @@ final class ProductService extends Base
             if ($value['image_name']) {
                 $filename = __DIR__ . '/../../../uploads/' . $value['image_name'];
                 $fp = fopen($filename, "r");
-                // var_dump(file_exists($filename));
                 if (file_exists($filename)) {
                     $contents = fread($fp, filesize($filename));
                     $byte_array = unpack('C*', $contents);
@@ -145,7 +144,6 @@ final class ProductService extends Base
 
     public function updateImage(array $input, int $productId): object
     {
-        var_dump($input);
         $data = $this->validateProduct($input, $productId);
         /** @var Task $task */
         $product = $this->getProductRepository()->updateImageName($data);
@@ -163,7 +161,6 @@ final class ProductService extends Base
     public function delete(int $productId): object
     {
         $product = $this->getProductFromDb($productId)->toJson();
-        var_dump($product);
         $this->getProductRepository()->delete($productId);
         // if (self::isRedisEnabled() === true) {
         //     $this->deleteFromCache($taskId, $userId);
@@ -176,7 +173,6 @@ final class ProductService extends Base
     {
         $product = $this->getProductFromDb($productId, (int) $input['decoded']->sub);
         $data = json_decode((string) json_encode($input), false);
-        var_dump(isset($data->image_name));
         if (isset($data->image_name)) {
             $product->updateImageName($data->image_name);
         } else {

@@ -52,12 +52,16 @@ final class ProductService extends Base
             ];
             if ($value['image_name']) {
                 $filename = __DIR__ . '/../../../uploads/' . $value['image_name'];
-                $fp = fopen($filename, "r");
-                if (file_exists($filename)) {
-                    $contents = fread($fp, filesize($filename));
-                    $byte_array = unpack('C*', $contents);
-                    $obj->image = $byte_array;
-                }
+                // $path = 'myfolder/myimage.png';
+                $type = pathinfo($filename, PATHINFO_EXTENSION);
+                $data = file_get_contents($filename);
+                $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+                // $fp = fopen($filename, "r");
+                // if (file_exists($filename)) {
+                // $contents = fread($fp, filesize($filename));
+                // $byte_array = unpack('C*', $contents);
+                $obj->image = $base64;
+                // }
             }
             array_push($productsArray, $obj);
         }
